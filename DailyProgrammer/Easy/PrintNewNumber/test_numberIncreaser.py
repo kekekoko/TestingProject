@@ -8,7 +8,7 @@ class TestNumberIncreaser(TestCase):
         self.increaser = NumberIncreaser()
 
     def assertIncreaseNumberWorks(self, testNumber, expectedOutput):
-        actualOutput = self.increaser.increaseNumber(testNumber)
+        actualOutput = self.increaser.increaseRecursive(testNumber)
         self.assertEqual(expectedOutput, actualOutput,
                          '{} not working, expected {} but was {}'.format(testNumber, expectedOutput, actualOutput))
 

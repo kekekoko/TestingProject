@@ -1,6 +1,17 @@
 class NumberIncreaser:
     # 375 [Easy}
 
+    def increaseRecursive(self, number):
+        lastDigit = number % 10
+        increasedDigit = lastDigit + 1
+        remainingNumber = number // 10
+        if remainingNumber == 0:
+            return increasedDigit
+        else:
+            if lastDigit == 9:
+                return increasedDigit + self.increaseRecursive(remainingNumber) * 100
+            return increasedDigit + self.increaseRecursive(remainingNumber) * 10
+
     def increaseNumber(self, number):
 
         numberOfDigits = self.getNumberOfDigits(number)
