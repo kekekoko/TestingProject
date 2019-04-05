@@ -1,40 +1,39 @@
-import math
-
-
 class NumberIncreaser:
     # 375 [Easy}
 
-    def increaseNumber(self, inputNumber):
-        # get number of digits
-        bla = 10
-        blub = 10
-        while inputNumber >= bla:
-            bla = bla * blub
+    def increaseNumber(self, number):
 
-        numberOfDigits = int(math.log10(bla))
+        numberOfDigits = self.getNumberOfDigits(number)
 
-        outputNumber = inputNumber
-
-        exponent = 0
-        while exponent < numberOfDigits:
-            currentDigit = (outputNumber % (10 ** (exponent + 1))) // (10 ** exponent)
-            if currentDigit != 9:
-                outputNumber += 10 ** exponent
+        currentDigit = 0
+        while currentDigit < numberOfDigits:
+            currentDigitValue = (number % (10 ** (currentDigit + 1))) // (10 ** currentDigit)
+            if currentDigitValue != 9:
+                number += 10 ** currentDigit
             else:
-                r = (outputNumber // (10 ** (exponent + 1)))
-                digitsBefore = r * (10 ** (exponent + 1))
-                if (exponent == 0):
+                r = (number // (10 ** (currentDigit + 1)))
+                digitsBefore = r * (10 ** (currentDigit + 1))
+                if currentDigit == 0:
                     digitsAfter = 0
                 else:
-                    digitsAfter = (outputNumber % (10 ** (exponent)))
+                    digitsAfter = (number % (10 ** currentDigit))
                 shiftedLeftDigitsBefore = digitsBefore * 10
-                outputNumber = shiftedLeftDigitsBefore + 10 ** (exponent + 1) + digitsAfter
-                exponent += 1
+                number = shiftedLeftDigitsBefore + 10 ** (currentDigit + 1) + digitsAfter
+                currentDigit += 1
                 numberOfDigits += 1
 
-            exponent += 1
+            currentDigit += 1
 
-        return outputNumber
+        return number
+
+    def getNumberOfDigits(self, number):
+        numberOfDigits = 1;
+        comparisonNumber = 10
+        while number >= comparisonNumber:
+            comparisonNumber = comparisonNumber * 10
+            numberOfDigits += 1
+
+        return numberOfDigits
 
 
 if __name__ == '__main__':
